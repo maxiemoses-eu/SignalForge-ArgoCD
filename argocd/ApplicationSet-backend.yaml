@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: signalforge
+spec:
+  generators:
+    - list:
+        elements:
+          - name: gateway
+            chart: charts/gateway
+            values: helm-values/gateway.yaml
+
+          - name: user
+            chart: charts/service-chart
+            values: helm-values/user.yaml
+
+          - name: product
+            chart: charts/service-chart
+            values: helm-values/product.yaml
+
+          - name: order
+            chart: charts/service-chart
+            values: helm-values/order.yaml
+
+          - name: payment
+            chart: charts/service-chart
+            values: helm-values/payment.yaml
+
+  template:
+    metadata:
+      name: "{{name}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/your-org/signalforge
+        targetRevision: main
+        path: "{{chart}}"
+        helm:
+          valueFiles:
+            - "../../{{values}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: signalforge
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

@@ -1,0 +1,40 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.25-alpine
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+# Internal service DNS names + ports
+services:
+  ui:
+    name: store-ui
+    port: 80
+
+  user:
+    name: user
+    port: 5000
+
+  product:
+    name: product
+    port: 5001
+
+  order:
+    name: order
+    port: 3002
+
+  payment:
+    name: payment
+    port: 5003

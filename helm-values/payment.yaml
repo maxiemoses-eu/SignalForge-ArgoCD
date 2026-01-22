@@ -1,0 +1,22 @@
+service:
+  name: payment
+  port: 5003
+
+image:
+  repository: your-ecr/payment-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+command: ["./payment"]
+
+health:
+  readinessPath: /health
+  livenessPath: /health
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 300m
+    memory: 256Mi

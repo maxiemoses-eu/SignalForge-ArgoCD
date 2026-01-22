@@ -1,0 +1,24 @@
+replicaCount: 1
+
+image:
+  repository: your-ecr/order-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 3002
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+secrets:
+  dbUrl: ""
+  jwtSecret: ""
+
+autoscaling:
+  enabled: false

@@ -1,0 +1,9 @@
+replicaCount: 2
+
+image:
+  repository: your-ecr/store-ui
+  tag: latest
+
+ingress:
+  enabled: true
+  host: store.signalforge.com

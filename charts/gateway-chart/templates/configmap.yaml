@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-nginx-config
+data:
+  nginx.conf: |
+    events {}
+
+    http {
+      server {
+        listen 80;
+
+        # -----------------------
+        # UI
+        # -----------------------
+        location / {
+          proxy_pass http://store-ui;
+        }
+
+        # -----------------------
+        # API ROUTES (BFF)
+        # -----------------------
+        location /api/users/ {
+          proxy_pass http://user:5000/;
+        }
+
+        location /api/orders/ {
+          proxy_pass http://order:3002/;
+        }
+
+        location /api/payments/ {
+          proxy_pass http://payment:5003/;
+        }
+
+        location /api/product/ {
+          proxy_pass http://product:5001/;
+        }
+
+        # -----------------------
+        # Health Check
+        # -----------------------
+        location /health {
+          return 200 "OK";
+        }
+      }
+    }
