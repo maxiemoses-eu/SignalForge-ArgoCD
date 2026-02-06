@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-postgres
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: postgresql
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 15.5.x  # Stable version
+    helm:
+      parameters:
+        - name: fullnameOverride
+          value: "postgres-service"
+        - name: auth.database
+          value: "signalforge_db"
+        - name: auth.username
+          value: "admin"
+        - name: auth.password
+          value: "MyStrongPassword123" # In production, use a Secret!
+        - name: primary.persistence.size
+          value: "8Gi"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: signalforge
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

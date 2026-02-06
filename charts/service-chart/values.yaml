@@ -1,24 +1,23 @@
+# Default settings for every StreamlinePay microservice
 replicaCount: 1
 
 image:
-  repository: your-ecr/order-service
-  tag: latest
+  repository: "" # Leave empty; defined per service
+  tag: ""        # Leave empty; defined per service
   pullPolicy: IfNotPresent
 
 service:
-  port: 3002
+  type: ClusterIP
+  port: 80       # Default port
 
 resources:
   requests:
     cpu: 100m
-    memory: 256Mi
+    memory: 128Mi
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 200m
+    memory: 256Mi
 
-secrets:
-  dbUrl: ""
-  jwtSecret: ""
-
-autoscaling:
-  enabled: false
+# Global env variables (like DB host) go here
+env:
+  DB_HOST: "postgres-service"
