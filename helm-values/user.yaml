@@ -3,7 +3,7 @@ service:
   port: 5000
 
 image:
-  repository: your-ecr/user-service
+  repository: signal-prod-users-service
   tag: latest
   pullPolicy: IfNotPresent
 

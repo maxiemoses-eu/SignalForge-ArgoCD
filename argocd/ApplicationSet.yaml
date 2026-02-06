@@ -10,6 +10,10 @@ spec:
             chart: charts/gateway
             values: helm-values/gateway.yaml
 
+          - name: store-ui
+            chart: charts/store-ui
+            values: helm-values/store-ui.yaml
+
           - name: user
             chart: charts/service-chart
             values: helm-values/user.yaml

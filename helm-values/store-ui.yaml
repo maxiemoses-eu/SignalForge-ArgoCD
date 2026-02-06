@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: your-ecr/store-ui
+  repository: signal-prod-store-ui
   tag: latest
 
 ingress:

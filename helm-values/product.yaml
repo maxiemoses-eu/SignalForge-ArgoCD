@@ -3,7 +3,7 @@ service:
   port: 5001
 
 image:
-  repository: your-ecr/productservice
+  repository: signal-prod-product-microservice
   tag: latest
   pullPolicy: IfNotPresent
 
