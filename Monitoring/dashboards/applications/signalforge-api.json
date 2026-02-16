@@ -1,0 +1,35 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "title": "API Request Rate (Traffic)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(rate(http_requests_total{job=\"signalforge-api\"}[5m]))",
+          "legendFormat": "Requests/sec"
+        }
+      ]
+    },
+    {
+      "title": "Error Rate (5xx)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(rate(http_requests_total{job=\"signalforge-api\", status=~\"5..\"}[5m]))",
+          "legendFormat": "Errors"
+        }
+      ]
+    }
+  ],
+  "title": "SignalForge API Overview",
+  "uid": "signalforge-api-001",
+  "version": 1
+}

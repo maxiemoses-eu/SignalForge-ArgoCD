@@ -1,0 +1,16 @@
+{{- $files := .Files.Glob "dashboards/**/*.json" -}}
+{{- range $path, $fileContents := $files }}
+{{- $dashboardName := base $path | replace ".json" "" | replace "_" "-" | lower }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ printf "db-%s" $dashboardName | trunc 63 }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    grafana_dashboard: "1"
+data:
+  {{ base $path }}: |-
+{{ $.Files.Get $path | indent 4 }}
+---
+{{- end }}

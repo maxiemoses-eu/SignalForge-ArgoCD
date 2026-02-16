@@ -1,0 +1,19 @@
+apiVersion: v2
+name: signalforge-monitoring
+description: "Umbrella chart for SignalForge observability stack"
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+dependencies:
+  # Industry standard for Prometheus, Grafana, and Alertmanager
+  - name: kube-prometheus-stack
+    version: "61.3.1" 
+    repository: "https://prometheus-community.github.io/helm-charts"
+    condition: kube-prometheus-stack.enabled
+
+  # Optimized for log aggregation and Promtail integration
+  - name: loki-stack
+    version: "2.10.2"
+    repository: "https://grafana.github.io/helm-charts"
+    condition: loki-stack.enabled
