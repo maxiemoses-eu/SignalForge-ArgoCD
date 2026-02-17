@@ -1,0 +1,22 @@
+# Source control
+.git/
+.gitignore
+
+# IDEs and local metadata
+.vscode/
+.idea/
+.DS_Store
+
+# Documentation and notes
+README.md
+LICENSE
+notes.txt
+
+# Helm specific
+# Ignore the Chart.lock if you want to allow dynamic version resolution
+# Chart.lock 
+
+# Local secrets or temp files
+*.tmp
+*.bak
+secrets.txt
