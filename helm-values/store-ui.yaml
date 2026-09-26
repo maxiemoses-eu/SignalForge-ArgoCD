@@ -1,9 +1,7 @@
 replicaCount: 2
-
 image:
   repository: signal-prod-store-ui
-  tag: latest
-
+  tag: build-3e65907
 ingress:
   enabled: true
   host: store.signalforge.com
